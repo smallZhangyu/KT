@@ -1,0 +1,22 @@
+.tabList {
+    display: flex;
+}
+.tabList li {
+    list-style: none;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    background: #ccc;
+    color: #333;
+    cursor: pointer;
+}
+
+.tabList li:hover, 
+.tabList li.actived {
+    background: #fff;
+    color: orange;
+}
+
+.tabBody {
+    margin-top: 10px;
+    min-height: 100px;
+}
