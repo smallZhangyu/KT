@@ -2,15 +2,15 @@ const convertRes2Blob = (resData, documentName) => {
   const fileName = documentName;
   const resContentType = 'application/json';
 
-  const blob = new Blob([JSON.stringify({ ...resData })], {
+  const blob = new Blob([`${resData}`], {
     type: resContentType,
   });
 
+  // handle IE
   if (typeof window.navigator?.msSaveBlob !== 'undefined') {
-    // handle IE
     window.navigator?.msSaveBlob(blob, decodeURI(fileName));
   } else {
-    console.log(window.URL.msSaveBlob);
+    // console.log(window.URL.msSaveBlob);
     const blobUrl = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = blobUrl;

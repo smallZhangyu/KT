@@ -4,8 +4,7 @@ const readFile = (file) => {
   fileReader.onload = function (evt) {
     try {
       const fileContent = evt.target.result;
-      const json = JSON.parse(fileContent);
-      console.log(json);
+      console.log(fileContent);
     } catch (e) {
       console.log(e);
     }
