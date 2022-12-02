@@ -1,0 +1,5 @@
+# 用于告诉 eslint 哪些文件、文件夹忽略
+
+temp.js
+
+\*_/vendor/_.js
