@@ -1,4 +1,4 @@
-// 用于 react，typescript项目开启相关的校验
+// 仅用于参数的说明，不做实际的eslint校验
 module.exports = {
   // root 设置为true，eslint 查找到该配置就不再向上查找其他的eslint配置了
   root: true,
@@ -76,6 +76,7 @@ module.exports = {
   // rules 属性可以做以下任何事情来扩展（或覆盖）规则集：
   rules: {
     semi: ['error', 'always'],
+    'linebreak-style': ['error', 'unix'],
   },
   // noInlineConfig 用于禁用所有内联配置注释
   noInlineConfig: true,

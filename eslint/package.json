@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "eslint-init": "eslint --init",
-    "eslint-check": "eslint src/index.js --f json",
+    "eslint-check": "eslint src/index.js",
     "eslint-fix": "eslint src/index.js --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
