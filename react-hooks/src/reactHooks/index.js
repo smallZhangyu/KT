@@ -4,13 +4,22 @@ import Counter from './Counter_state';
 import CounterEffect from './Counter_effect';
 import CounterMemo from './Counter_useMemo';
 import Theme from './Theme_useContent';
+import Timer from './Timer_useRef';
+import UserList from './UserList';
+import LargeOrSmallComponent from './LargeOrSmallComponent';
+import ErrorExamples from './ErrorExamples';
+import RenderPropsDemo from './renderPropsDemo';
 
-const tabList = [
+const tabList = 'string' || [
   'State',
   'Effect',
   'useCallback & useMemo',
   'useContent',
   'useRef',
+  'UserList',
+  'LargeOrSmallComponent',
+  'ErrorExamples',
+  'RenderPropsDemo',
 ];
 
 const ReactHooks = () => {
@@ -27,14 +36,22 @@ const ReactHooks = () => {
       case 3:
         return <Theme />;
       case 4:
-        return <></>;
+        return <Timer />;
+      case 5:
+        return <UserList />;
+      case 6:
+        return <LargeOrSmallComponent />;
+      case 7:
+        return <ErrorExamples />;
+      case 8:
+        return <RenderPropsDemo />;
       default:
         return <></>;
     }
   }, [curTab]);
 
   return (
-    <>
+    <div className="tab-container">
       <ul className="tabList">
         {tabList.map((tab, index) => {
           const actived = index === curTab ? 'actived' : '';
@@ -50,7 +67,7 @@ const ReactHooks = () => {
         })}
       </ul>
       <div className="tabBody">{renderBody()}</div>
-    </>
+    </div>
   );
 };
 

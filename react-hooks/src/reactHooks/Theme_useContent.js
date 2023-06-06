@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 
 const MyContent = React.createContext();
 
@@ -13,16 +13,16 @@ const theme = {
   },
 };
 
-const ChildComponet = () => {
+const ChildComponent = memo(() => {
   console.log('%c Child Component render', 'color: orange');
   const { background, color } = useContext(MyContent);
 
   return (
     <p style={{ background, color }}>
-      This is Child Compontent to display useContent.
+      This is Child Component to display useContent.
     </p>
   );
-};
+});
 
 const Theme = () => {
   const [myTheme, setMyTheme] = useState('light');
@@ -38,7 +38,7 @@ const Theme = () => {
 
   return (
     <MyContent.Provider value={theme[revertTheme]}>
-      <ChildComponet />
+      <ChildComponent />
       <button onClick={clickHandle}>Trigger theme to {myTheme}</button>
     </MyContent.Provider>
   );

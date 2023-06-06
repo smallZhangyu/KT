@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react class render props</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script src="./lib/lodash.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      const app = document.querySelector('#app');
+      const root = ReactDOM.createRoot(app);
+
+      class MousePosition extends React.Component {
+        state = {
+          X: 0,
+          Y: 0,
+        };
+        componentDidMount = () => {
+          document.addEventListener('mousemove', this.handleMousemove);
+        };
+        componentWillUnMount = () => {
+          document.removeEventListener('mousemove', this.handleMousemove);
+        };
+        handleMousemove = (event) => {
+          this.setState({
+            X: event.pageX,
+            Y: event.pageY,
+          });
+        };
+
+        render() {
+          return (
+            <React.Fragment>
+              {this.props.render(this.state.X, this.state.Y)}
+            </React.Fragment>
+          );
+        }
+      }
+
+      class MouseXY extends React.PureComponent {
+        render() {
+          return (
+            <MousePosition
+              render={(x, y) => {
+                return (
+                  <h3 className="box">
+                    Mouse position:
+                    <br />
+                    X: {x}, Y: {y}
+                  </h3>
+                );
+              }}
+            />
+          );
+        }
+      }
+
+      const element = <MouseXY />;
+
+      root.render(element);
+    </script>
+  </body>
+</html>

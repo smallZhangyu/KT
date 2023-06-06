@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react class hoc</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script src="./lib/lodash.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      const app = document.querySelector('#app');
+      const root = ReactDOM.createRoot(app);
+
+      function useMousePosition(Comp) {
+        return class MousePosition extends React.Component {
+          state = {
+            X: 0,
+            Y: 0,
+          };
+          componentDidMount = () => {
+            document.addEventListener('mousemove', this.handleMousemove);
+          };
+          componentWillUnMount = () => {
+            document.removeEventListener('mousemove', this.handleMousemove);
+          };
+          handleMousemove = (event) => {
+            this.setState({
+              X: event.pageX,
+              Y: event.pageY,
+            });
+          };
+
+          render() {
+            return <Comp {...this.state} />;
+          }
+        };
+      }
+
+      class MouseXY extends React.PureComponent {
+        render() {
+          return (
+            <h3 className="box">
+              Mouse position:
+              <br />
+              X: {this.props.X}, Y: {this.props.Y}
+            </h3>
+          );
+        }
+      }
+
+      // HOC组件的使用必须先调用HOC函数，然后再已组件的方式使用
+      const WithMouseXY = useMousePosition(MouseXY);
+
+      const element = <WithMouseXY />;
+
+      root.render(element);
+    </script>
+  </body>
+</html>

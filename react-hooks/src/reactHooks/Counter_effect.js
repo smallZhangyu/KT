@@ -10,23 +10,36 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 const Counter = () => {
   const [count, setCount] = useState(0);
   const [name, setName] = useState('tom');
+
   useEffect(() => {
-    console.log('3. effect invoke');
+    console.log(
+      'Effect --->  useEffect no dependencies after render callback every time.'
+    );
+  }); // 每次render 之后都执行
+
+  useEffect(() => {
+    console.log(
+      'Effect --->  useEffect has empty dependency, only first render after callback.'
+    );
+  }, []);
+
+  useEffect(() => {
+    console.log('Effect --->  3. useEffect invoke');
 
     return () => {
-      console.log('5. effect unmount');
+      console.log('Effect --->  5. useEffect unmount');
     };
-  }, [count]);
+  }, [count]); // count 变化后执行
 
   useLayoutEffect(() => {
-    console.log('2. useLayoutEffect invoke');
+    console.log('Effect --->  2. useLayoutEffect invoke');
 
     return () => {
-      console.log('4. useLayoutEffect unmount');
+      console.log('Effect --->  4. useLayoutEffect unmount');
     };
   }, [count]);
 
-  console.log('1. CounterEffect Component render');
+  console.log('Effect --->  1. CounterEffect Component render');
 
   return (
     <div>

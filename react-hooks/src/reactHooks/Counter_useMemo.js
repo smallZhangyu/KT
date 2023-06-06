@@ -1,7 +1,7 @@
 /*eslint no-unused-vars: "off"*/
 import React, { useCallback, useState, memo, useMemo } from 'react';
 
-const AddCountBtn = memo(({ clickHandle, btnLabel }) => {
+const AddCountBtn = memo(({ btnLabel, clickHandle = () => {} }) => {
   console.log('3. Child Component: Add count btn render');
 
   return <button onClick={clickHandle}>{btnLabel}</button>;
@@ -39,6 +39,7 @@ const Counter = () => {
     <div>
       <InputBox value={name} changeHandle={inputChangeHandle} />
       <AddCountBtn clickHandle={btnClickHandle} btnLabel={count} />
+      <button onClick={btnClickHandle}>add {count}</button>
     </div>
   );
 };
