@@ -4,7 +4,8 @@
 
 ## B
 
-1. BFC (Block format context): 块级格式化上下文，一块独立渲染区域，内部元素的渲染不会影响边界以外的元素
+1. BDD (Behavior Derived Develop)：测试术语，行为驱动开发
+2. BFC (Block format context): 块级格式化上下文，一块独立渲染区域，内部元素的渲染不会影响边界以外的元素
 
 ## C
 
@@ -58,7 +59,8 @@
 
 ## T
 
-1. TLS (Transport Layer Security)：传输层安全
+1. TDD (Test Derived Develop)：测试术语，测试驱动开发
+2. TLS (Transport Layer Security)：传输层安全
 
 ## U
 

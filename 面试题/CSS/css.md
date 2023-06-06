@@ -99,9 +99,9 @@
     <!-- 垂直居中 -->
     inline 元素：line-height 的值等于 height 的值
     absolute 元素(需要知道元素的高度)：top: 50%; margin-top: 负值（一半的自身高度）
-    absolute 元素(不需要知道元素的宽高度，transform 是CSS3属性，不兼容低版本浏览器)：left: 50%; top: 50%; transform: (-50%, -50%);
+    absolute 元素(不需要知道元素的宽高度，transform 是CSS3属性，不兼容低版本浏览器)：left: 50%; top: 50%; transform: translate(-50%, -50%);
     absolute 元素(不需要知道元素的宽高度，兼容各种低版本浏览器)：top: 0; left: 0; bottom: 0; right: 0; margin: auto;
-    block 元素：父元素使用flex布局
+    block 元素：父元素使用flex布局(display: flex; justify-content: center; align-items: center;)
    ```
 
 ## 图文样式

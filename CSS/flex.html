@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flex 布局</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      p {
+        margin-bottom: 10px;
+      }
+      h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+      hr {
+        margin: 10px 0;
+      }
+      ul {
+        display: flex;
+        background: #eee;
+      }
+      li {
+        list-style: none;
+        padding: 5px 10px;
+        background: #ddd;
+        border: 1px solid #999;
+      }
+
+      .note {
+        color: #f60;
+      }
+      /* justify-content 的设置 */
+      #justify-content1 {
+        justify-content: center;
+      }
+
+      #justify-content2 {
+        justify-content: space-between;
+      }
+
+      #justify-content3 {
+        justify-content: space-around;
+      }
+
+      #justify-content4 {
+        justify-content: space-evenly;
+      }
+
+      #justify-content5 {
+        justify-content: flex-end;
+      }
+      #justify-content5 li:first-child {
+        margin-right: auto;
+      }
+      /* align-items 设置 */
+      .align-items {
+        min-height: 80px;
+      }
+      #align-items1 {
+        align-items: stretch;
+      }
+      #align-items2 {
+        align-items: flex-start;
+      }
+      #align-items3 {
+        align-items: flex-end;
+      }
+      #align-items4 {
+        align-items: center;
+      }
+      #align-items5 {
+        align-items: baseline;
+      }
+      #align-items6 {
+        align-items: flex-end;
+      }
+      #align-items6 li:first-child {
+        align-self: flex-start;
+        margin-right: auto;
+      }
+      #align-items6 li:nth-child(2) {
+        align-self: center;
+        margin-right: auto;
+      }
+
+      #flex-reverse {
+        flex-direction: row-reverse;
+      }
+      #flex-column {
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>
+      默认的flex布局，<span class="note"
+        >justify-content: flex-start; align-items: stretch;</span
+      >
+      副轴默认是拉伸的
+    </h3>
+    <ul id="main1">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <!-- 主轴 justify-content 的设置 -->
+    <h3>主轴设置：<span class="note">justify-content: center;</span></h3>
+    <ul id="justify-content1">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>主轴设置：<span class="note">justify-content: space-between;</span></h3>
+    <ul id="justify-content2">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>主轴设置：<span class="note">justify-content: space-around;</span></h3>
+    <ul id="justify-content3">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>主轴设置：<span class="note">justify-content: space-evenly;</span></h3>
+    <ul id="justify-content4">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>
+      主轴设置：<span class="note">justify-content: flex-end;</span>
+      flexbox不允许通过以上关键字指定个别项的排列方式。然而对于子项某一侧指定值为auto的外边距，且那一侧还有空间，那么该外边距就会扩展占据可用空间。<span
+        class="note"
+        >子项设置右侧外边距为auto；</span
+      >
+    </h3>
+    <ul id="justify-content5">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <!-- 副轴 align-items 的设置 -->
+    <h3>副轴设置：<span class="note">默认值 align-items: stretch;</span></h3>
+    <ul id="align-items1" class="align-items">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>副轴设置：<span class="note">align-items: flex-start;</span></h3>
+    <ul id="align-items2" class="align-items">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>副轴设置：<span class="note">align-items: flex-end;</span></h3>
+    <ul id="align-items3" class="align-items">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>副轴设置：<span class="note">align-items: center;</span></h3>
+    <ul id="align-items4" class="align-items">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>
+      副轴设置：<span class="note">align-items: baseline;</span>
+      以文本的基线对齐
+    </h3>
+    <ul id="align-items5" class="align-items">
+      <li>Home</li>
+      <li style="font-size: 40px">Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>
+      副轴设置：个别元素单独于其他元素设置，<span class="note"
+        >子元素使用 align-self</span
+      >
+    </h3>
+    <ul id="align-items6" class="align-items">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <!-- flex 方向的设置 -->
+    <h3>
+      设置flex 方向的场景：<span class="note"
+        >flex-direction: row-reverse;</span
+      >
+    </h3>
+    <ul id="flex-reverse">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <h3>
+      设置flex 方向的场景：<span class="note">flex-direction: column;</span>
+    </h3>
+    <ul id="flex-column">
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Mails</li>
+      <li>About</li>
+    </ul>
+    <hr />
+
+    <!-- 子元素的flex的设置 -->
+    <h3>
+      子元素的flex值由三部分组成，<span class="note"
+        >flex: [flex-grow] [flex-shrink] [flex-basis]</span
+      >
+    </h3>
+    <p>
+      <span class="note">flex-basis</span>
+      的取值有：auto(默认值，表示如果子元素有设置width就取宽度，没有则取内容的宽度)、长度值、百分比、content。
+    </p>
+    <p>
+      <span class="note">flex-grow</span>
+      弹性系数，用于如果子元素的宽度未超过父元素的宽度，父元素剩余的宽度如何给子元素分配，取值是一个
+      数值，表示剩余空间的一个比值，默认是0，表示从flex-basis取得尺寸后就不再扩展。
+    </p>
+    <p>
+      <span class="note">flex-shrink</span
+      >，用于如果子元素的总宽度超过父元素的宽度后，如何收缩各自的宽度。取值也是一个数值，默认是1，表示如果空间不够，所有子元素都会以自己的首选尺寸为基准等比例收缩。<span
+        class="note"
+        >计算公式：(子元素的flex-shrink*flex-basis)/(所有子元素的(flex-shrink*flex-basis)之和)，取得的比例基数再*该子元素的flex-basis</span
+      >
+    </p>
+    <p style="margin-top: 20px">
+      <span class="note">flex的分配思路：</span>1.
+      先检查flex-basis，确定假想的主尺寸；2.
+      确定实际的主尺寸。如果安装假想的主尺寸把各项排布好之后，容器内还有剩余空间，那么由flex-grow系数决定各自扩展多少；如果容器装不下那么多项，则根据flex-shrink系数决定各项如何收缩。
+    </p>
+
+    <!-- 子元素order的设置 -->
+    <p>
+      <span class="note">order</span>
+      可用于重拍子元素的显示顺序，默认为0，负值为向前拍。不会影响tab的切换顺序。
+    </p>
+
+    <!--  flexbox 多行布局属性   -->
+    <h3>多行的flexbox布局</h3>
+    <p>
+      <span class="note">flex-wrap</span>
+      控制是否折行显示，可取值有nowrap(默认值)、wrap、wrap-reverse
+    </p>
+    <p>
+      <span class="note">flex-grow</span>
+      在多行/多列布局中的计算是以行为单位的，因此项目的可扩展空间以行的宽度为限。
+    </p>
+    <p>
+      <span class="note">align-content</span>
+      对多行容器生效(也就是flex-wrap的取值非nowrap时生效)，其作用与justify-content
+      对主轴内容排布的作用非常相似。
+    </p>
+    <p class="note">
+      多行flex布局中没有办法控制特定的某一行，如果某一行扩展的太宽，可通过给每个子元素设置max-width解决。
+    </p>
+    <p style="color: #f60; margin-top: 50px">
+      注意：IE9 及更早版本的IE不支持Flexbox。
+    </p>
+  </body>
+</html>
