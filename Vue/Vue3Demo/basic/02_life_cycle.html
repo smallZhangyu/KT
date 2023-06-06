@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue 生命周期</title>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+      <!-- <input type="text" v-model="message" /> -->
+    </div>
+
+    <script>
+      const vueApp = Vue.createApp({
+        data() {
+          return {
+            message: 'Hello Vue',
+          };
+        },
+        beforeCreate() {
+          // 拿不到实例以及DOM元素
+          // console.log(this.message);
+          // console.log(app.innerHTML);
+        },
+        created() {
+          // 可以拿到实例，但是 DOM 还未挂载
+          // console.log(this.message);
+          // console.log(app.innerHTML);
+        },
+        beforeMount() {
+          // 可以拿到实例，但是 DOM 还未挂载
+          // console.log(this.message);
+          // console.log(app.innerHTML);
+        },
+        mounted() {
+          // 可以拿到实例，DOM也已挂载
+          // console.log(this.message);
+          // console.log(app.innerHTML);
+        },
+        beforeUpdate() {
+          // 实例已更新，但是Dom未更新
+          // console.log(this.message);
+          // console.log(app.innerHTML);
+        },
+        updated() {
+          // 实例已更新，Dom也更新完成
+          console.log(this.message);
+          console.log(app.innerHTML);
+        },
+        beforeUnmount() {
+          // 实例和DOM都可以拿到
+          // console.log(this.message);
+          // console.log(app.innerHTML);
+        },
+        unmounted() {
+          // 实例可以拿到，DOM拿不到
+          console.log(this.message);
+          console.log(app.innerHTML);
+        },
+      });
+      vueApp.mount('#app');
+
+      setTimeout(() => {
+        // vueApp.message = 'Hi Vue3 !';
+        vueApp.unmount();
+      }, 2000);
+    </script>
+  </body>
+</html>

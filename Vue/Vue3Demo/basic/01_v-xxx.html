@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue v-xxx</title>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+      <input type="text" v-model="message" />
+      <button v-on:click="handleClick($event, 123)">click</button>
+
+      <!-- v-if & v-else -->
+      <h4>v-if & v-else</h4>
+      <div v-if="isShow">v-if show</div>
+      <div v-else>v-else hide</div>
+
+      <!-- v-for -->
+      <!-- 
+        v-for 除了可以循环数组，也可以是对象，数字，字符串
+        注意点：
+        1. 列表渲染需要添加key属性 -- 用来跟踪列表的身份
+        2. v-if和v-for尽量不要一起使用，Vue3中v-if优先级更高 -- 利用计算属性来完成这类功能
+        3. template 标签起到的作用 --- 形成一个整体容器并且不会被渲染
+       -->
+      <h4>v-for</h4>
+      <ul>
+        <li v-for="item in userList" :key="item.id">
+          {{item.name}} <input type="text" />
+        </li>
+      </ul>
+      <!-- 循环一个对象 v-for="item, key, index in {name: 'jeff', age: 23}" -->
+      <div v-for="item, key, index in {name: 'jeff', age: 23}">
+        {{item}} - {{key}} - {{index}}
+      </div>
+      <!-- 循环一个数字 v-for="item in 4" -->
+      <div v-for="item in 4">{{item}}</div>
+      <!-- 循环一个字符串 v-for="item in 'Hello'" -->
+      <div v-for="item in 'Hello'">{{item}}</div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+      let app = createApp({
+        data() {
+          return {
+            message: 'Hello Vue.',
+            isShow: true,
+            userList: [
+              { id: 1, name: 'ZhangSan' },
+              { id: 2, name: 'Lisi' },
+              { id: 3, name: 'Wangwu' },
+            ],
+          };
+        },
+        methods: {
+          handleClick(event, num) {
+            console.log(event);
+            console.log(num, this.message);
+          },
+        },
+      }).mount('#app');
+
+      setTimeout(() => {
+        app.userList.unshift({ id: 4, name: 'jeff' });
+      }, 3000);
+    </script>
+  </body>
+</html>

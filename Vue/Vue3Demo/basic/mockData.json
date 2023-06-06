@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "小红", "gender": "女", "age": 23 },
+  { "id": 2, "name": "小白", "gender": "男", "age": 25 },
+  { "id": 3, "name": "大红", "gender": "女", "age": 25 },
+  { "id": 4, "name": "大白", "gender": "男", "age": 22 }
+]

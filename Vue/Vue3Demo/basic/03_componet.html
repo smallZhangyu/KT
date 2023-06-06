@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Component</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .box {
+        background: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <hello-world
+        :count="count"
+        @custom-click="handleCustomClick"
+        title="title"
+        class="box"
+      ></hello-world>
+      {{count}}
+    </div>
+
+    <script>
+      const MyLogo = {
+        template: `<div>Logo</div>`,
+      };
+
+      const HelloWorld = {
+        inheritAttrs: false, // 阻止默认的属性传递到容器的操作
+        props: {
+          count: Number,
+        },
+        emits: ['custom-click'],
+        template: `
+            <div>
+                <my-logo></my-logo>
+                <h1 v-bind:title="$attrs.title">{{message}}</h1>
+                <input type="text" />
+                <div :class="$attrs.class">child props: {{count}}</div>
+            </div>`,
+        data() {
+          return {
+            message: 'Hello Vue',
+          };
+        },
+        mounted() {
+          setTimeout(() => {
+            this.message = 'Hi Vue';
+            // 通过自定义事件向父组件传递data
+            this.$emit('custom-click', 'data from child to parent');
+          }, 2000);
+
+          console.log(this.$attrs); // $attrs 也可以作为父子组件通讯
+        },
+        components: { MyLogo: MyLogo }, // 局部注册组件，只能在当前组件使用
+      };
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            count: 10,
+          };
+        },
+        methods: {
+          handleCustomClick(data) {
+            console.log(data);
+          },
+        },
+      });
+
+      // 全局组件注册
+      app.component('hello-world', HelloWorld);
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Slot 插槽</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .box {
+        background: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <hello-world>
+        <!-- 具名插槽需要通过v-slot:slotName 来命名，可简写为#slotName -->
+        <template v-slot:title>
+          <!-- slot只能访问当前组件的作用域，不能访问子组件的，因此count拿不到值 -->
+          <h1>{{message}}, {{count}}</h1>
+        </template>
+        <template #list="{list}">
+          <ul>
+            <li v-for="item in list">{{item}}</li>
+          </ul>
+        </template>
+      </hello-world>
+    </div>
+
+    <script>
+      const HelloWorld = {
+        props: {
+          count: Number,
+        },
+        emits: ['custom-click'],
+        template: `
+            <div>
+                <slot name="title"></slot>
+                <slot name="list" :list="list"></slot>
+            </div>`,
+        data() {
+          return {
+            count: 10,
+            list: ['苹果', '香蕉', '西瓜', '荔枝'],
+          };
+        },
+      };
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: 'Hello Vue',
+          };
+        },
+        methods: {},
+      });
+
+      // 全局组件注册
+      app.component('hello-world', HelloWorld);
+
+      app.mount('#app');
+    </script>
+  </body>
+</html>

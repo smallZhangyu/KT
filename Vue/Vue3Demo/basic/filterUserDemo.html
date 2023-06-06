@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue 基础用法demo</title>
+    <style>
+      .active {
+        background: #f60;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>根据条件过滤用户</h1>
+      <div id="searchWrapper">
+        <input type="text" v-model="searchByName" />
+        <button :class="activedGender('全部')" @click="handleSearchBtn">
+          全部
+        </button>
+        <button :class="activedGender('男')" @click="handleSearchBtn">
+          男
+        </button>
+        <button :class="activedGender('女')" @click="handleSearchBtn">
+          女
+        </button>
+      </div>
+
+      <ul>
+        <li v-for="user in filterUserList">
+          {{user.name}} - {{user.gender}} - {{user.age}}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            userList: [],
+            searchByName: '',
+            searchByGender: '全部',
+          };
+        },
+        computed: {
+          filterUserList() {
+            return this.userList
+              .filter((user) => user.name.includes(this.searchByName))
+              .filter(
+                (user) =>
+                  user.gender === this.searchByGender ||
+                  '全部' === this.searchByGender
+              );
+          },
+        },
+        methods: {
+          handleSearchBtn(event) {
+            this.searchByGender = event.target.innerText;
+          },
+          activedGender(gender) {
+            return { active: this.searchByGender === gender };
+          },
+        },
+        created() {
+          fetch('./mockData.json')
+            .then((res) => {
+              console.log(res);
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+              this.userList = data;
+            });
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
