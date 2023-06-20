@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react class render props</title>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+    <script src="./lib/lodash.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      const app = document.querySelector('#app');
+      const root = ReactDOM.createRoot(app);
+
+      class MouseXY extends React.PureComponent {
+        state = {
+          time: 0,
+        };
+        handlerClick = () => {
+          setTimeout(() => {
+            this.setState({ time: 1 });
+            this.setState({ time: 5 });
+          }, 1000);
+
+          this.setState({ time: 2 });
+
+          ReactDOM.flushSync(() => {
+            this.setState({ time: 3 });
+          });
+
+          this.setState({ time: 4 });
+        };
+
+        render() {
+          console.log(this.state.time);
+          return <div onClick={this.handlerClick}>set state test</div>;
+        }
+      }
+
+      function MouseXY2(props) {
+        const [number, setNumber] = React.useState(0);
+        /* 监听 number 变化 */
+        // React.useEffect(() => {
+        //   console.log('监听number变化，此时的number是:  ' + number);
+        // }, [number]);
+
+        const handerClick = () => {
+          /** 高优先级更新 **/
+          ReactDOM.flushSync(() => {
+            setNumber(2);
+            console.log('flushSync number', number);
+          });
+          /* 批量更新 */
+          setNumber(1);
+          console.log('normal number', number);
+          /* 滞后更新 ，批量更新规则被打破 */
+          setTimeout(() => {
+            ReactDOM.flushSync(() => {
+              setNumber(3);
+            });
+            setNumber(4);
+            console.log('settimout number', number);
+          }, 0);
+        };
+
+        console.log(number);
+        return (
+          <div>
+            <span> {number}</span>
+            <button onClick={handerClick}>number++</button>
+          </div>
+        );
+      }
+
+      function Index2() {
+        React.useInsertionEffect(() => {
+          /* 动态创建 style 标签插入到 head 中 */
+          const style = document.createElement('style');
+          style.innerHTML = `
+            .css-in-js{
+              color: red;
+              font-size: 20px;
+            }
+          `;
+          document.head.appendChild(style);
+        }, []);
+
+        return <div className="css-in-js"> hello , useInsertionEffect </div>;
+      }
+
+      const element = <Index2 />;
+
+      root.render(element);
+    </script>
+  </body>
+</html>

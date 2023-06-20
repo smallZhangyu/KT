@@ -45,7 +45,7 @@ State-Hooks 有 2 种 hooks；
 
    ```js
    用法示例：
-
+   
    function countReducer(state, action) {
     switch(action.type){
         case 'add':
@@ -56,9 +56,9 @@ State-Hooks 有 2 种 hooks；
             return state;
     }
    }
-
+   
    const [count, dispatchCount] = useReducer(countReducer, 0);
-
+   
     dispatchCount({type: 'add'});
    ```
 
@@ -144,7 +144,7 @@ useCallback 与 useMemo 要想达到减少渲染的效果，子组件必须使�
      if (!users) {
        return null;
      }
-
+   
      return users.data.filter((user) => {
        return user.firstName.includes(searchKey);
      });
@@ -215,9 +215,7 @@ const ChildComp = React.forwardRef((props, ref) => {
 
 ## 五、useContext
 
-Context 看上去就是一个全局的数据，为什么要设计这样一个复杂的机制，  
-而不是直接用一个全局的变量去保存数据呢？ -- 为了能够进行数据的绑定，  
-当这个 Context 的数据发生变化时，使用这个数据的组件能够自动刷新。
+Context 看上去就是一个全局的数据，为什么要设计这样一个复杂的机制，而不是直接用一个全局的变量去保存数据呢？ -- 为了能够进行数据的绑定，当这个 Context 的数据发生变化时，使用这个数据的组件能够自动刷新。
 
 Context 的缺点：  
 1、会让调试变得困难，因为很难跟踪某个 Context 的变化究竟是如何产生的；  
@@ -306,7 +304,7 @@ const query = useDeferredValue(searchWord);
        intervalId = setInterval(() => {
          console.log(count); // 始终输出 0，即使 count 改变
        }, 1000);
-
+   
        return () => {
          clearInterval(intervalId);
        };
@@ -317,15 +315,15 @@ const query = useDeferredValue(searchWord);
        </div>
      );
    }
-
+   
    // 死循环
    function Example() {
      const [count, setCount] = useState(0);
-
+   
      useEffect(() => {
        setCount(count + 1);
      });
-
+   
      return <div>{count}</div>;
    }
    ```
@@ -352,7 +350,7 @@ componentDidCache，getDerivedStateFromError，Hooks 还没法实现这些功能
 
 2 个基本原则：
 
-1. 在保证 State 完整性的同时，也要保证状态最小化，不要滥用 State 去当变量使用，凡是能够通过计算所得的数据，就不要放在 state 里，然后使用 useMemo()对计算结果缓存；
+1. 在保证 State 完整性的同时，也要保证状态最小化，不要滥用 State 去当变量使用，凡是能够通过计算所得的数据，就不要放在 state 里，应该使用 useMemo()对计算结果进行计算并缓存；
 
    一个典型的错误场景是对过滤后的数据进行展示，该数据使用 state 去存储，应该通过计算所得。
 

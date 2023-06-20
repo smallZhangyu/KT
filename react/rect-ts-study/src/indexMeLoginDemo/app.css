@@ -1,0 +1,22 @@
+.appWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100vh;
+}
+footer {
+	display: flex;
+	justify-content: space-between;
+	height: 40px;
+	line-height: 40px;
+}
+footer a {
+	flex: 1;
+	background: #eee;
+	text-align: center;
+	color: #f60;
+}
+footer a.active {
+	background: #f60;
+	color: #fff;
+}

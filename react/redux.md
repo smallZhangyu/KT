@@ -1,5 +1,7 @@
 # Redux
 
+[TOC]
+
 ## Redux store 的特点
 
 1. Redux Store 是全局唯一的，整个应用程序一般只有一个 store；
@@ -16,7 +18,7 @@
 Redux 可以单独作为一个状态管理库使用。
 
 ```js
-import { legacy_createStore as createStore } from 'redux';
+import { legacy_createStore as createStore, combineReducers } from 'redux';
 // const createStore = require('redux').legacy_createStore;
 
 const initState = {
@@ -34,8 +36,8 @@ const reducer = (state = initState, action) => {
   }
 };
 
-// 创建store
-const store = createStore(reducer);
+// 创建store，combineReducers 用于将多个reducers合并，counter为state的命名空间
+const store = createStore(combineReducers({ counter: reducer }));
 
 // 使用subscribe监听Store的变化
 store.subscribe(() => console.log(store.getState()));
@@ -140,3 +142,25 @@ function DataList() {
 ```
 
 > 异步 Action 并不是一个具体的概念，而可以把它看作是 Redux 的一个使用模式。它通过组合使用同步 Action，在没有引入新概念的同时，用一致的方式提供了处理异步逻辑的方案。
+
+## redux devtools 的使用
+
+1. 安装插件对应的模块： redux-devtools-extension
+2. 在 store 中作为`createStore()`的参数使用
+
+   ```js
+   import { createStore, applyMiddleware, combineReducers } from 'redux';
+   import { composeWithDevTools } from 'redux-devtools-extension';
+   
+   const store = createStore(reducers, composeWithDevTools());
+   
+   // 如果使用中间件的话，格式如下
+   const rootReducer = combineReducers({
+     counter: counterReducer,
+   });
+   const composedEnhancer = applyMiddleware(thunkMiddleware);
+   const store = createStore(
+     rootReducer,
+     composeWithDevTools(composedEnhancer)
+   );
+   ```
