@@ -16,7 +16,7 @@
             setTimeout(() => {
                 this.message = 'Hi Vue $nextTick() !'
                 // 此时输出的是旧的Hello World，数据的更新是一个异步的
-                // console.log(this.$refs.header.innerHTML);
+                console.log(this.$refs.header.innerHTML);
 
                 // $.nextTick() 方法可以获取到下一周期的值
                 this.$nextTick().then(() => console.log(this.$refs?.header.innerHTML));

@@ -4,7 +4,7 @@
 
 ### Vue2 官方脚手架为 @vue/cli
 
-1. 通过 `vue create` 快速搭建一个新项目，或者直接通过 `vue serve` 构建新想法的原型。你也可以通过 `vue ui` 通过一套图形化界面管理你的所有项目。
+1. 通过 `vue create projectName` 快速搭建一个新项目，或者直接通过 `vue serve` 构建新想法的原型。你也可以通过 `vue ui` 通过一套图形化界面管理你的所有项目。
 
 ### Vue3 官方脚手架为 create-vue
 

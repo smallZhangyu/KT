@@ -160,3 +160,11 @@ export default {
 };
 </script>
 ```
+
+## VueRouter ts 类型
+
+1. `RouteRecordRaw`，路由表选项类型；
+2. `RouteMeta`，扩展 meta 的类型；
+3. `RouterOptions`，createRouter 的配置类型；
+4. `RouteLocationNormalized`，标准化的路由地址；
+5. `Router`，router 实例的类型；

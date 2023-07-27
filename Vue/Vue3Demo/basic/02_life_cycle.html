@@ -22,51 +22,54 @@
         },
         beforeCreate() {
           // 拿不到实例以及DOM元素
-          // console.log(this.message);
-          // console.log(app.innerHTML);
+          console.log(
+            'beforeCreate this: ' + Object.prototype.toString.call(this)
+          );
+          console.log('beforeCreate data: ' + this.message);
+          console.log('beforeCreate dom: ' + app.innerHTML);
         },
         created() {
           // 可以拿到实例，但是 DOM 还未挂载
-          // console.log(this.message);
-          // console.log(app.innerHTML);
+          console.log('created data: ' + this.message);
+          console.log('created dom: ' + app.innerHTML);
         },
         beforeMount() {
           // 可以拿到实例，但是 DOM 还未挂载
-          // console.log(this.message);
-          // console.log(app.innerHTML);
+          console.log('beforeMount data: ' + this.message);
+          console.log('beforeMount dom: ' + app.innerHTML);
         },
         mounted() {
           // 可以拿到实例，DOM也已挂载
-          // console.log(this.message);
-          // console.log(app.innerHTML);
+          console.log('mounted data: ' + this.message);
+          console.log('mounted dom: ' + app.innerHTML);
         },
         beforeUpdate() {
           // 实例已更新，但是Dom未更新
-          // console.log(this.message);
-          // console.log(app.innerHTML);
+          console.log('beforeUpdate data: ' + this.message);
+          console.log('beforeUpdate dom: ' + app.innerHTML);
         },
         updated() {
           // 实例已更新，Dom也更新完成
-          console.log(this.message);
-          console.log(app.innerHTML);
+          console.log('updated data: ' + this.message);
+          console.log('updated dom: ' + app.innerHTML);
         },
         beforeUnmount() {
           // 实例和DOM都可以拿到
-          // console.log(this.message);
-          // console.log(app.innerHTML);
+          console.log('beforeUnmount data: ' + this.message);
+          console.log('beforeUnmount dom: ' + app.innerHTML);
         },
         unmounted() {
           // 实例可以拿到，DOM拿不到
-          console.log(this.message);
-          console.log(app.innerHTML);
+          console.log('beforeUnmount data: ' + this.message);
+          console.log('beforeUnmount dom: ' + app.innerHTML);
         },
       });
       vueApp.mount('#app');
 
       setTimeout(() => {
-        // vueApp.message = 'Hi Vue3 !';
-        vueApp.unmount();
-      }, 2000);
+        vueApp.message = 'Hi Vue3 !';
+        // vueApp.unmount();
+      }, 5000);
     </script>
   </body>
 </html>

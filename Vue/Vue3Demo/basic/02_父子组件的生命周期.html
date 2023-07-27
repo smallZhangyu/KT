@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue 父子组件的生命周期顺序</title>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+      <button @click="handleClick">click</button>
+      <!-- <input type="text" v-model="message" /> -->
+      <child-component :parentMsg="message"></child-component>
+    </div>
+
+    <script>
+      const ChildComponent = {
+        data() {
+          return {
+            msg: 'this is Child component',
+          };
+        },
+        template: `<div>{{msg}} - {{parentMsg}}</div>`,
+        props: ['parentMsg'],
+        beforeCreate() {
+          console.log('Child beforeCreate');
+        },
+        created() {
+          console.log('Child created');
+        },
+        beforeMount() {
+          console.log('Child beforeMount');
+        },
+        mounted() {
+          console.log('Child mounted');
+        },
+        beforeUpdate() {
+          console.log('Child beforeUpdate');
+        },
+        updated() {
+          console.log('Child updated');
+        },
+        beforeUnmount() {
+          console.log('Child beforeUnmount');
+        },
+        unmounted() {
+          console.log('Child unmounted');
+        },
+      };
+
+      const vueApp = Vue.createApp({
+        data() {
+          return {
+            message: 'Hello Vue',
+          };
+        },
+        components: { ChildComponent },
+        beforeCreate() {
+          console.log('Parent beforeCreate');
+        },
+        created() {
+          console.log('Parent created');
+        },
+        beforeMount() {
+          console.log('Parent beforeMount');
+        },
+        mounted() {
+          console.log('Parent mounted');
+        },
+        beforeUpdate() {
+          console.log('Parent beforeUpdate');
+        },
+        updated() {
+          console.log('Parent updated');
+        },
+        beforeUnmount() {
+          console.log('Parent beforeUnmount');
+        },
+        unmounted() {
+          console.log('Parent unmounted');
+        },
+        methods: {
+          handleClick() {
+            this.message = 'Hi Vue3.';
+          },
+        },
+      });
+      vueApp.mount('#app');
+
+      setTimeout(() => {
+        vueApp.message = 'Hi Vue3 !';
+        // vueApp.unmount();
+      }, 3000);
+    </script>
+  </body>
+</html>

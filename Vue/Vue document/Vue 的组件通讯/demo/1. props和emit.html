@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>1. props和emit 组件通讯</title>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+      <button @click="handleClick">click</button>
+      <child-component :parent="message" @child-msg="msgFromChild" />
+    </div>
+
+    <script>
+      const ChildComponent = {
+        inheritAttrs: false,
+        data() {
+          return {
+            msg: 'this is Child component',
+          };
+        },
+        template: `<div>self msg: {{msg}} - msg from parent: {{parent}}
+            <br />
+            <button  @click="sayToParent">say to parent</button></div>`,
+        props: ['parent'],
+        emits: ['child-msg'], // Vue3
+        methods: {
+          sayToParent() {
+            this.$emit('child-msg', 'Hello parent');
+          },
+        },
+      };
+
+      const vueApp = Vue.createApp({
+        data() {
+          return {
+            message: 'Hello Vue',
+          };
+        },
+        components: { ChildComponent },
+        methods: {
+          handleClick() {
+            this.message = 'Hi Vue3.';
+          },
+          msgFromChild(msg) {
+            console.log('child say to parent: ' + msg);
+          },
+        },
+      });
+      vueApp.mount('#app');
+
+      setTimeout(() => {
+        vueApp.message = 'Hi Vue3 !';
+        // vueApp.unmount();
+      }, 3000);
+    </script>
+  </body>
+</html>
